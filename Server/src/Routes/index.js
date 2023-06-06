@@ -1,26 +1,34 @@
-const {getCharById} = require("../Controllers/getCharById")
-const { login } = require("../Controllers/login");
-const { postFav, deleteFav } = require("../Controllers/handleFavorites");
+const { getCharById } = require("../Controllers/getCharById")
+
+const postUser = require("../Controllers/postUser")
+const login = require("../Controllers/login")
+const postFav = require("../Controllers/postFav")
+const deleteFav = require("../Controllers/deleteFav")
 
 const router = require("express").Router();
 
 
-router.get( "/character/:id" , (req, res) => {
-    getCharById(req,res)
+
+router.get("/login", (req, res) => {
+    login(req, res)
+    });
+
+router.post("/login", postUser)
+
+
+router.post("/fav", (req, res) => {
+    postFav(req, res)
 });
 
-router.get("/login", (req, res) =>{
-    login(req,res)
+router.get("/character/:id", (req, res) => {
+    getCharById(req, res)
+});
+
+router.delete("/fav/:id", (req, res) => {
+    deleteFav(req, res)
 });
 
 // router.get("/login", login ) Es lo mismo que el de arriba. 
 
-router.post("/fav", (req,res) => {
-    postFav(req,res)
-});
-
-router.delete("/fav/:id", (req,res) =>{
-    deleteFav(req,res)
-});
 
 module.exports = router;
